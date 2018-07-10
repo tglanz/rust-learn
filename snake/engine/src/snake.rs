@@ -1,31 +1,13 @@
 use std::collections::VecDeque;
 
-use terrain::TerrainLocation;
-use vec2::Vec2;
+use terrain::TerrainIndex;
 
-pub type Snake = VecDeque<TerrainLocation>;
+pub type Snake = VecDeque<TerrainIndex>;
 
-pub fn advance(snake: &Snake, direction: &Vec2) -> Snake {
-    let mut cloned = snake.clone();
-    cloned.pop_back();
-    return advance_head(&cloned, direction);
+pub fn add_part(snake: &mut Snake, terrain_index: TerrainIndex) {
+    snake.push_front(terrain_index);
 }
 
-pub fn advance_to_food(snake: &Snake, direction: &Vec2) -> Snake {
-    return advance_head(snake, direction);    
-}
-
-
-fn advance_head(snake: &Snake, direction: &Vec2) -> Snake {
-    let new_head_location = match snake.front() {
-        Some(head_location) => TerrainLocation::add_vec(
-            head_location,
-            direction
-        ),
-        None => panic!("Empty snake is invalid"),
-    };
-
-    let mut cloned = snake.clone();
-    cloned.push_front(new_head_location);
-    cloned
+pub fn is_occupy_terrain_index(snake: &Snake, terrain_index: &TerrainIndex) -> bool {
+    return snake.iter().any( |&x| x == *terrain_index )
 }
