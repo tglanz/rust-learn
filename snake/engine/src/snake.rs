@@ -9,5 +9,9 @@ pub fn add_part(snake: &mut Snake, terrain_index: TerrainIndex) {
 }
 
 pub fn is_occupy_terrain_index(snake: &Snake, terrain_index: &TerrainIndex) -> bool {
-    return snake.iter().any( |&x| x == *terrain_index )
+    snake.iter().any( |&x| x == *terrain_index)
+}
+
+pub fn is_head(snake: &Snake, terrain_index: &TerrainIndex) -> bool {
+    terrain_index == snake.front().expect("Headless snakes should not exist!")
 }

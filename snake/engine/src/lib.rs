@@ -2,9 +2,11 @@
 
 extern crate rand;
 
-mod inputs;
 mod vec2;
-mod terrain;
-mod snake;
-mod tiles;
-mod game_state;
+
+pub mod directions;
+pub mod snake;
+pub mod level;
+pub mod terrain;
+pub mod tiles;
+pub mod game_state;

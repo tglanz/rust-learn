@@ -30,10 +30,19 @@ impl TerrainLocation {
 }
 
 impl TerrainSize {
-    pub fn new(rows: i16, columns: i16) -> TerrainSize {
+    pub fn new(rows: &i16, columns: &i16) -> TerrainSize {
         TerrainSize {
-            rows, columns
+            rows: *rows,
+            columns: *columns
         }
+    }
+
+    pub fn get_rows(&self) -> i16 {
+        self.rows
+    }
+
+    pub fn get_columns(&self) -> i16 {
+        self.columns
     }
 
     pub fn flat_size(terrain_size: &TerrainSize) -> i16 {
@@ -60,8 +69,8 @@ mod tests {
     fn terrain_index_to_location() {
         assert_eq!(
             index_to_location(
-                2,
-                TerrainSize::new(2, 2)
+                &2,
+                &TerrainSize::new(2, 2)
             ),
             TerrainLocation::new(1, 0)
         )
@@ -71,8 +80,8 @@ mod tests {
     fn terrain_location_to_index() {
         assert_eq!(
             location_to_index(
-                TerrainLocation::new(1, 0),
-                TerrainSize::new(2, 2)
+                &TerrainLocation::new(1, 0),
+                &TerrainSize::new(2, 2)
             ),
             2
         )
