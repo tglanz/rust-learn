@@ -87,8 +87,12 @@ impl GameState {
                 let new_food_index = find_random_food_index(&snake, &tiles);
                 tiles[new_food_index as usize] = Tile::Food;
             }
-            Tile::Empty => {
-                snake.pop_back();
+            Tile::Empty => {     
+                if snake::is_head_and_body_collide(&snake) {
+                    is_alive = false;
+                } else {
+                    snake.pop_back();
+                }
             },
             Tile::Occupied => {
                 is_alive = false;
@@ -133,6 +137,6 @@ fn input_key_to_direction_vector(direction: Direction) -> Vec2 {
         Direction::Up => Vec2::new(0, -1),
         Direction::Down => Vec2::new(0, 1),
         Direction::Left => Vec2::new(-1, 0),
-        Direction::Right => Vec2::new(0, 1),
+        Direction::Right => Vec2::new(1, 0),
     }
 }

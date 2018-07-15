@@ -1,8 +1,7 @@
 [package]
-name = "console"
+name = "threading"
 version = "0.1.0"
 authors = ["Tal Glanzman <talglanzman@gmail.com>"]
 
 [dependencies]
 console = "*"
-engine = { path = "../engine" }
